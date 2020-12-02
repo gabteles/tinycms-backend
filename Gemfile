@@ -12,6 +12,16 @@ gem 'rails', '~> 6.0.3'
 gem 'puma', '~> 4.1'
 gem 'rack-cors'
 
+# HTTP Interface
+gem 'dry-schema'
+
+# Service Layer
+gem 'simple_command'
+
+# IoC / DI
+gem 'arkency-command_bus', require: 'arkency/command_bus'
+gem 'dry-auto_inject'
+
 # Storage
 gem 'bcrypt', '~> 3.1.7'
 gem 'mongoid', '~> 7.0.5'
