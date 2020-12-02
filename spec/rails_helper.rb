@@ -41,6 +41,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include ControllerSpecHelpers, type: :controller
   config.include CommandBusHelpers, type: :controller
+  config.include Dry::Monads[:result]
 
   # Remove this line to enable support for ActiveRecord
   config.use_active_record = false

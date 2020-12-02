@@ -21,7 +21,7 @@ RSpec.shared_examples 'command dispatcher action' do
   context 'with valid params' do
     let(:params) { valid_params }
 
-    let(:handler_response) { double(:handler_response, success?: true, result: nil) }
+    let(:handler_response) { Success(nil) }
 
     before { allow(command_bus).to receive(:call).and_return(handler_response) }
 
@@ -31,19 +31,19 @@ RSpec.shared_examples 'command dispatcher action' do
     end
 
     context 'when handler response is successful' do
-      let(:handler_response) { double(:handler_response, success?: true, result: { foo: 'bar' }) }
+      let(:handler_response) { Success(foo: 'bar') }
 
       it { is_expected.to be_successful }
       it { expect(json_body).to have_key(:result) }
-      it { expect(json_body[:result]).to eq handler_response.result }
+      it { expect(json_body[:result]).to eq handler_response.value! }
     end
 
     context 'when handler response is a failure' do
-      let(:handler_response) { double(:handler_response, success?: false, errors: { foo: ['bar'] }) }
+      let(:handler_response) { Failure(foo: ['bar']) }
 
       it { is_expected.to be_bad_request }
       it { expect(json_body).to have_key(:errors) }
-      it { expect(json_body[:errors]).to eq handler_response.errors }
+      it { expect(json_body[:errors]).to eq handler_response.failure }
     end
   end
 end

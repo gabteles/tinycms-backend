@@ -7,18 +7,11 @@ class ApplicationController < ActionController::API
         .then { return }
     end
 
-    command_bus.call(command).then { |operation| render_operation_result(operation) }
+    render command_bus.call(command).either(
+      ->(result) { { json: { result: result } } },
+      ->(failure) { { json: { errors: failure }, status: :bad_request } }
+    )
   end
-
-  private
 
   delegate :command_bus, to: 'Rails.configuration'
-
-  def render_operation_result(operation)
-    if operation.success?
-      render(json: { result: operation.result })
-    else
-      render(json: { errors: operation.errors }, status: :bad_request)
-    end
-  end
 end

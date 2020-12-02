@@ -2,12 +2,14 @@
 
 module Auth
   class AuthenticateUserHandler
-    prepend SimpleCommand
+    include Dry::Transaction
 
-    def initialize(access_token:)
-      @access_token = access_token
+    step :fetch_user_from_google
+
+    private
+
+    def fetch_user_from_google(access_token:)
+      # TODO
     end
-
-    def call; end
   end
 end

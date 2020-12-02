@@ -16,7 +16,8 @@ gem 'rack-cors'
 gem 'dry-schema'
 
 # Service Layer
-gem 'simple_command'
+gem 'dry-monads'
+gem 'dry-transaction'
 
 # IoC / DI
 gem 'arkency-command_bus', require: 'arkency/command_bus'
