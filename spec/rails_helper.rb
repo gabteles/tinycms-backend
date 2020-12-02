@@ -22,9 +22,26 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec', '**', '*_examples.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
+module ControllerSpecHelpers
+  def json_body
+    JSON.parse(response.body, symbolize_names: true)
+  end
+end
+
+module CommandBusHelpers
+  def command_bus
+    Rails.configuration.command_bus
+  end
+end
 
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+  config.include ControllerSpecHelpers, type: :controller
+  config.include CommandBusHelpers, type: :controller
+
   # Remove this line to enable support for ActiveRecord
   config.use_active_record = false
 

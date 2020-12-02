@@ -7,11 +7,12 @@ class ApplicationController < ActionController::API
         .then { return }
     end
 
-    Rails.configuration.command_bus.call(command)
-         .then { |operation| render_operation_result(operation) }
+    command_bus.call(command).then { |operation| render_operation_result(operation) }
   end
 
   private
+
+  delegate :command_bus, to: 'Rails.configuration'
 
   def render_operation_result(operation)
     if operation.success?

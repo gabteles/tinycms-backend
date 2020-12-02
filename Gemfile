@@ -35,6 +35,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
 end
 
+group :test do
+  gem 'factory_bot'
+end
+
 group :development do
   gem 'listen'
   gem 'rubocop'

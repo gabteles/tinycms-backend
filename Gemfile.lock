@@ -102,6 +102,8 @@ GEM
       dry-inflector (~> 0.1, >= 0.1.2)
       dry-logic (~> 1.0, >= 1.0.2)
     erubi (1.10.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -231,6 +233,7 @@ DEPENDENCIES
   byebug
   dry-auto_inject
   dry-schema
+  factory_bot
   listen
   mongoid (~> 7.0.5)
   puma (~> 4.1)
