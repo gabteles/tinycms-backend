@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
 
   def render_operation_result(operation)
     if operation.success?
-      render(json: operation.result)
+      render(json: { result: operation.result })
     else
       render(json: { errors: operation.errors }, status: :bad_request)
     end

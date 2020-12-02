@@ -8,8 +8,6 @@ module Auth
       @access_token = access_token
     end
 
-    def call
-
-    end
+    def call; end
   end
 end
