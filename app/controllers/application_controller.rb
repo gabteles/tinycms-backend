@@ -7,8 +7,12 @@ class ApplicationController < ActionController::API
         .then { return }
     end
 
+    # CQRS Key takeway: a command can safely return the following data:
+    # - Execution result: success or failure;
+    # - Error messages or validation errors, in case of a failure;
+    # - The aggregate’s new version number, in case of success;
     render command_bus.call(command).either(
-      ->(result) { { json: { result: result } } },
+      ->(_result) { { head: :ok } },
       ->(failure) { { json: { errors: failure }, status: :bad_request } }
     )
   end

@@ -34,8 +34,7 @@ RSpec.shared_examples 'command dispatcher action' do
       let(:handler_response) { Success(foo: 'bar') }
 
       it { is_expected.to be_successful }
-      it { expect(json_body).to have_key(:result) }
-      it { expect(json_body[:result]).to eq handler_response.value! }
+      it { expect(response.body).to be_blank }
     end
 
     context 'when handler response is a failure' do
