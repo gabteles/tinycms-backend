@@ -18,6 +18,7 @@ gem 'dry-schema'
 # Service Layer
 gem 'dry-monads'
 gem 'dry-transaction'
+gem 'httparty'
 
 # IoC / DI
 gem 'arkency-command_bus', require: 'arkency/command_bus'
@@ -38,6 +39,7 @@ end
 
 group :test do
   gem 'factory_bot'
+  gem 'webmock'
 end
 
 group :development do
